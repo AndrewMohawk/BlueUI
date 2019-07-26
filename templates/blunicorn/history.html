@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>The Blunicorn</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/ready.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/demo.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/jquery.dataTables.css')}}">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='assets/img/blunicorn.ico') }}" />
+</head>
+<body>
+	<!-- Back to top button -->
+	<a id="button">
+		<div class="icon-big text-center">
+			<i class="la la-arrow-circle-up"></i>
+		</div>
+	</a>
+	<div class="wrapper">
+		<div class="main-header">
+			<div class="logo-header" style="text-align: center">
+					
+				<a href="index.html" class="logo"  style="color: #009; text-align: center;">
+						The Blunicorn!
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
+			</div>
+		</div>
+			<div class="sidebar">
+				<div class="scrollbar-inner sidebar-wrapper">
+					<div class="user">
+						<img src="{{ url_for('static', filename='assets/img/blunicorn.webp') }}" height="150px"/>
+						<div class="info" style="color: #009; font-size: 20px;">
+								
+						</div>
+						<div class="clearfix"></div>
+
+						
+					</div>
+					<ul class="nav">
+						<li class="nav-item active">
+							<a href="index.html">
+								<i class="la la-dashboard"></i>
+								<p>Live Devices</p>
+								
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/history">
+								<i class="la la-table"></i>
+								<p>Device History / Search</p>
+								
+							</a>
+						</li>
+						
+						<li class="nav-item update-pro">
+							<button  data-toggle="modal" data-target="#modalUpdate" onclick="location.reload();">
+								<i class="la la-hand-pointer-o"></i>
+								<p>Refresh</p>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="main-panel">
+				
+				<div class="content">
+				
+					<div class="container-fluid">
+						<div class="row">
+								<div class="col-md">
+									<div class="card mb-3">
+										<div class="card-header">
+											<i class="la la-signal"></i> Bluetooth Devices
+										</div>
+										<div class="card-body">
+												<div class="table-sm"  >
+														<table class="display compact cell-border" id="dataTable" cellspacing="0">
+															<thead>
+																<tr>
+																		<th>UUID</th>
+																	<th>Seen</th>
+																	<th>Vers</th>
+																	<th>Address</th>
+																	<th>RSSI</th>
+																	<th>Name</th>
+																	<th>ManuF</th>
+																	<th>Type</th>
+																</tr>
+															</thead>
+														   
+															<tbody>
+																<tr class="table-success">
+																	<td colspan="7">Loading...</td>
+																	
+																</tr>
+															   
+															</tbody>
+														</table>
+													</div>
+										</div>
+										<div class="card-footer small text-muted">Last Updated <span  id='updatedlast'>0</span>s ago</div>
+									</div>
+								</div>
+							
+						</div>
+						<h4>Device Properties ( <i id="DeviceMac" class="small text-muted">No Device</i> )</h4>
+						<div class="row">
+							
+								<div class="col-md">
+									<div class="card mb-3">
+										<div class="card-header">
+											<i class="la la-laptop" ></i> Device Details 
+										</div>
+										<div class="card-body">
+												
+												<div class="table-sm" >
+														<table class="display compact cell-border" id="deviceDetails" cellspacing="0" >
+															<thead>
+																<tr>
+																	<th width="15%">Detail Name</th>
+																	<th>Detail Property</th>																	
+																</tr>
+																
+															</thead>
+														   
+															<tbody>
+																<tr class="table-info">
+																	<td>&nbsp;</td>
+																	<td>Please select device from list</td>
+																	
+																</tr>
+															   
+															</tbody>
+														</table>
+													</div>
+										</div>
+										
+									</div>
+								</div>
+							
+						</div>
+					</div>
+				</div>
+				<footer class="footer">
+					<div class="container-fluid">
+						<div class="copyright ml-auto">
+							2019, made with <i class="la la-heart heart text-danger"></i> by <a href="https://www.twitter.com/AndrewMohawk">AndrewMohawk</a>
+						</div>				
+					</div>
+				</footer>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script src="{{ url_for('static', filename='assets/js/core/jquery.3.2.1.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/core/popper.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/core/bootstrap.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/ready.min.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/demo.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/datatables/jquery.dataTables.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/js/datatables/dataTables.bootstrap4.js')}}"></script>
+
+<script type="text/javascript">
+	
+	function printValues(obj) {
+	returnStr = "";
+    for(var k in obj) {
+		returnStr += k + ":";
+        if(obj[k] instanceof Object) {
+            returnStr += "-- " + printValues(obj[k]);
+        } else {
+			returnStr += obj[k] + "<br>"
+			console.log(returnStr);	
+           //console.log(k + ":" + obj[k] + "<br>");
+		};
+		returnStr  = ""
+	}
+	//console.log(returnStr);
+	//return returnStr
+};
+	
+	
+	// Call the dataTables jQuery plugin
+	var secondsPassed=0;
+	$(document).ready(function() 
+	{
+	  
+		
+
+		
+	  $.fn.dataTable.ext.errMode = 'none';
+	  var tableDetails = $('#deviceDetails').DataTable({
+		"pageLength": 25,
+	});
+	  var table = $('#dataTable').DataTable({
+		"ajax": {
+			url: "/fetchAll",
+			error: function (jqXHR, textStatus, errorThrown) {
+			  //weep. it has all failed.
+			  console.log("Ajax failed. The unicorns are dying!");
+			},
+			
+		  },
+		"pageLength": 25,
+		"paging":   true,
+		"ordering": true,
+		"info":     true,
+		"searching" : true,
+		"order": [[ 0, "desc" ]],
+		"columns": [
+		{ "data": "uuid" },	
+		{ "data": "seen" },
+			{ "data": "vers" },
+			{ "data": "address" },
+			{ "data": "rssi" },
+			{ "data": "name" },
+			{ "data": "manuf" },
+			{ "data": "type" },
+			
+			
+	  ],
+	});
+	
+		table.column(0).visible(false);
+
+		$('#dataTable tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+			//alert( 'You clicked on '+data[0]+'\'s row' );
+			//console.log(data);
+			populateInfo(data);
+    } );
+
+	function IsJsonString(str) {
+		jsonData = "";
+		try {
+			jsonData = JSON.parse(str);
+		} catch (e) {
+			return false;
+		}
+		return jsonData;
+	}
+
+	function populateInfo(data)
+	{
+		uuid = data["uuid"];
+
+		$.ajax({
+			url: "/getDeviceInfo/" + uuid,
+			type: 'GET',
+			success: function (result) {
+			
+			$('#DeviceMac').text(data["address"]);
+			tableDetails.clear();
+			if (result) {
+				var returnedData = JSON.parse(result);
+				
+				for(dataKey in returnedData)
+				{
+					dataVal = returnedData[dataKey]
+					if(dataVal != null)
+					{
+						jsonData = IsJsonString(dataVal);
+						if (jsonData != false)
+						{
+							
+							if(dataKey.indexOf("rssi") === -1)
+							{
+								str = "";
+								
+								if(typeof jsonData === 'object')
+								{
+
+									for (d in jsonData)
+									{
+										str += "- " + jsonData[d] + "<br/>";
+									}
+								}
+								else
+								{
+									str = dataVal;
+								}
+								//row = "<tr><td  width='15%''><strong>" + dataKey + "</strong></td><td>" + str + "</td></tr>";
+								//$('#deviceDetails').append(row);
+								tableDetails.row.add([dataKey,str]).draw();
+							}
+							else
+							{
+								
+								str = "";
+								for (d in jsonData)
+								{
+									
+									str += jsonData[d]["rssi"]  + ","; // I mean what, there must be a function to do this.
+								}
+								//row = "<tr><td  width='15%''><strong>RSSI Values</strong></td><td>" + str + "</td></tr>";
+								//$('#deviceDetails').append(row);
+								
+								tableDetails.row.add(['RSSI values',str]).draw();
+								
+							}
+
+						}
+						else
+						{
+							row = "<tr><td  width='15%''><strong>" + dataKey + "</strong></td><td>" + dataVal + "</td></tr>";
+							//$('#deviceDetails').append(row);
+							tableDetails.row.add([dataKey,dataVal]).draw();
+						}
+						
+					}
+				}
+				//tableDetails.draw();
+				//location.hash = "#deviceDetails";
+				//$('#deviceDetails').scroll();
+				tableDetails.search('').draw();
+				$("body,html").animate(
+					{
+						scrollTop: $("#DeviceMac").offset().top
+					},
+					800 //speed
+					);
+				
+			}
+	
+			},
+			error: function () {
+				//alert("No");
+			}
+			
+			})
+
+
+		$('#DeviceMac').text(data["address"]);
+		
+		$("#deviceDetails tbody tr").remove();
+		for(prop in data)
+		{
+			val = data[prop]
+			if(val == "")
+			{
+				val = "<span class='text-muted'>(unknown)</span>";
+			}
+			row = "<tr><td  width='15%''><strong>" + prop + "</strong></td><td>" + val + "</td></tr>";
+			$('#deviceDetails').append(row);
+		}
+		
+
+	}
+
+	
+	});
+	</script>
+
+</html>

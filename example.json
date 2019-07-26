@@ -1,0 +1,101 @@
+{
+    "21bd1c5f-5884-4abd-926c-bd4278a7ecd3": {
+        "_seen": " +85s",
+        "address": "28:CF:E9:18:D2:66",
+        "company": "Apple, Inc. ",
+        "created": 1563798705,
+        "lap": "18:D2:66",
+        "last_seen": 1563799736,
+        "le_company_data": "0700",
+        "manuf": "Apple",
+        "rssi": "-94 ",
+        "uuid": "21bd1c5f",
+        "vers": "BTLE"
+    },
+    "3cfd2105-e307-4c6b-838c-b82407cd9048": {
+        "_seen": " +12s",
+        "address": "D4:48:24:51:CF:EB",
+        "created": 1563799518,
+        "lap": "51:CF:EB",
+        "last_seen": 1563799809,
+        "manuf": "Unknown",
+        "rssi": "-91 ",
+        "uuid": "3cfd2105",
+        "vers": "BTLE",
+        "new": "yes"
+    },
+    "4f7bc1a7-19c0-4f71-bdf5-29c10563df75": {
+        "_seen": " +1s",
+        "address": "5E:A6:FD:C3:34:40",
+        "created": 1563799250,
+        "lap": "C3:34:40",
+        "last_seen": 1563799820,
+        "manuf": "Unknown",
+        "rssi": "-75 ",
+        "uuid": "4f7bc1a7",
+        "vers": "BTLE"
+    },
+    "797feba9-9b1f-4f65-bf13-0ad1de3acb9b": {
+        "_seen": " +190s",
+        "address": "3C:28:6D:0E:B9:47",
+        "created": 1563798259,
+        "lap": "0E:B9:47",
+        "last_seen": 1563799631,
+        "manuf": "Google",
+        "name": "Pixel 3",
+        "uuid": "797feba9",
+        "vers": "CL5.0"
+    },
+    "a4dc41da-0cd8-4d05-a197-8dececd7f937": {
+        "_seen": " +12s",
+        "address": "00:04:4B:55:DC:07",
+        "created": 1563798020,
+        "lap": "55:DC:07",
+        "last_seen": 1563799809,
+        "manuf": "Nvidia",
+        "name": "SHIELD",
+        "rssi": "-76 ",
+        "type": "Set-top box",
+        "uuid": "a4dc41da",
+        "vers": "CL4.1"
+    },
+    "b50896a6-5946-432b-8fd6-fd2dc7dd4fac": {
+        "_seen": " +1s",
+        "address": "58:8A:18:E7:1C:6A",
+        "company": "Apple, Inc. ",
+        "created": 1563798015,
+        "lap": "E7:1C:6A",
+        "last_seen": 1563799820,
+        "le_company_data": "01181782f1",
+        "manuf": "Apple, Inc. ",
+        "rssi": "-75 ",
+        "uuid": "b50896a6",
+        "vers": "BTLE"
+    },
+    "e448ce66-1867-4eee-9242-5204fac91489": {
+        "_seen": " +1s",
+        "address": "45:C5:C2:70:86:CD",
+        "company": "Apple, Inc. ",
+        "created": 1563798705,
+        "lap": "70:86:CD",
+        "last_seen": 1563799820,
+        "le_company_data": "0b00",
+        "manuf": "Apple, Inc. ",
+        "rssi": "-88 ",
+        "uuid": "e448ce66",
+        "vers": "BTLE"
+    },
+    "fbe351e3-c4fd-4ff2-bd2b-62629cd661f9": {
+        "_seen": " +11s",
+        "address": "44:00:49:48:B9:2B",
+        "created": 1563798021,
+        "lap": "48:B9:2B",
+        "last_seen": 1563799810,
+        "manuf": "AmazonTe",
+        "name": "Echo Spot-53C",
+        "rssi": "-70 ",
+        "type": "Loudspeaker",
+        "uuid": "fbe351e3",
+        "vers": "CL4.2"
+    }
+}
