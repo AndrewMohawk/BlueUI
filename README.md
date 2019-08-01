@@ -1,5 +1,5 @@
 # BlueUI
-
+![Live Devices](liveView.png)
  Blue UI is a simple web interface for blue_hydra that allows you to search the data as well as view active/daily and total devices seen.
  
  *Live Devices* is displayed similar to the blue_hydra interface and can be queried on the fly by selecting any of the devices to view the rest of its details.
@@ -58,3 +58,13 @@ Next you can enable each service and then install them to run:
 - sudo service blue_ui start
 
 You will be able to check the status of both by doing `sudo service <name> status`
+
+# Screenshots
+## Live View
+![Live Devices](liveView.png)
+
+## Historical View
+![History](historyView.png)
+
+## Device Properties
+![Device Properties](deviceProperties.png)
