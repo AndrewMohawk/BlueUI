@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 from flask import Flask
 from flask import render_template
 from flask import abort
@@ -45,6 +44,29 @@ def getDeviceInfo(uuid):
         abort(418)
 
     return(json.dumps(deviceDetails))
+@app.route('/totalBTDevices')
+def getTotalBT():
+    numTotalUnique = 0
+    try:
+        if(debug == True):
+            db = sqlite3.connect('file:blue_hydra.db?mode=ro', uri=True)
+        else:
+            db = sqlite3.connect('file:/home/pi/blue_hydra/bin/blue_hydra.db?mode=ro', uri=True)
+        
+        
+        cursor = db.cursor()
+
+        totalUniqueSQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE vendor != 'N/A - Random Address'"
+        cursor.execute(totalUniqueSQL)
+        numTotalUnique = cursor.fetchone()[0]
+        
+        db.close()
+
+    except Exception as e:
+        print(e)
+        pass
+
+    return(str(numTotalUnique))
 
 @app.route('/getTotals')
 def getTotals():
