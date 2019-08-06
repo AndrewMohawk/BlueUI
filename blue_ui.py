@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 import sqlite3
 
-debug = True
+debug = False
 app = Flask(__name__)
 
 def populateFieldWithEmpty(theDict,theField,theValue=""):
@@ -22,9 +22,9 @@ def getDeviceInfo(uuid):
         try:
             
             if(debug == True):
-                db = sqlite3.connect('file:blue_hydra.db?mode=ro', uri=True)
+                db = sqlite3.connect('file:blue_ui.db?mode=ro', uri=True)
             else:
-                db = sqlite3.connect('file:/home/pi/blue_hydra/bin/blue_hydra.db?mode=ro', uri=True)
+                db = sqlite3.connect('file:/etc/blue_hydra/blue_ui.db?mode=ro', uri=True)
             db.row_factory = dict_factory
             cursor = db.cursor()
 
@@ -49,14 +49,14 @@ def getTotalBT():
     numTotalUnique = 0
     try:
         if(debug == True):
-            db = sqlite3.connect('file:blue_hydra.db?mode=ro', uri=True)
+            db = sqlite3.connect('file:blue_ui.db?mode=ro', uri=True)
         else:
-            db = sqlite3.connect('file:/home/pi/blue_hydra/bin/blue_hydra.db?mode=ro', uri=True)
+            db = sqlite3.connect('file:/etc/blue_hydra/blue_ui.db?mode=ro', uri=True)
         
         
         cursor = db.cursor()
 
-        totalUniqueSQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE vendor != 'N/A - Random Address'"
+        totalUniqueSQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE vendor != 'N/A - Random Address' OR NAME != ''"
         cursor.execute(totalUniqueSQL)
         numTotalUnique = cursor.fetchone()[0]
         
@@ -73,19 +73,19 @@ def getTotals():
     returnTotals = {}
     try:
         if(debug == True):
-            db = sqlite3.connect('file:blue_hydra.db?mode=ro', uri=True)
+            db = sqlite3.connect('file:blue_ui.db?mode=ro', uri=True)
         else:
-            db = sqlite3.connect('file:/home/pi/blue_hydra/bin/blue_hydra.db?mode=ro', uri=True)
+            db = sqlite3.connect('file:/etc/blue_hydra/blue_ui.db?mode=ro', uri=True)
         
         
         cursor = db.cursor()
 
-        totalUniqueSQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE vendor != 'N/A - Random Address'"
+        totalUniqueSQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE vendor != 'N/A - Random Address' OR NAME != ''"
         cursor.execute(totalUniqueSQL)
         numTotalUnique = cursor.fetchone()
 
         
-        totalUniqueTodaySQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE last_seen BETWEEN strftime('%s','now','start of day') AND strftime('%s','now','localtime') AND vendor != 'N/A - Random Address'"
+        totalUniqueTodaySQL = "SELECT COUNT( DISTINCT UUID) from blue_hydra_devices WHERE last_seen BETWEEN strftime('%s','now','start of day') AND strftime('%s','now','localtime') AND (vendor != 'N/A - Random Address' OR NAME != '')"
         cursor.execute(totalUniqueTodaySQL)
         numTotalDayUnique = cursor.fetchone()
 
@@ -120,12 +120,12 @@ def fetchAllDevices():
     devices = []
     try:
         if(debug == True):
-            db = sqlite3.connect('file:blue_hydra.db?mode=ro', uri=True)
+            db = sqlite3.connect('file:blue_ui.db?mode=ro', uri=True)
         else:
-            db = sqlite3.connect('file:/home/pi/blue_hydra/bin/blue_hydra.db?mode=ro', uri=True)
+            db = sqlite3.connect('file:/etc/blue_hydra/blue_ui.db?mode=ro', uri=True)
         db.row_factory = dict_factory
         cursor = db.cursor()
-        allDevicesSQL = "SELECT uuid,last_seen,lmp_version,le_address_type, address, classic_rssi, le_rssi, name, manufacturer,company,company_type, vendor, classic_minor_class from blue_hydra_devices WHERE vendor != 'N/A - Random Address'"
+        allDevicesSQL = "SELECT uuid,last_seen,lmp_version,le_address_type, address, classic_rssi, le_rssi, name, manufacturer,company,company_type, vendor, classic_minor_class from blue_hydra_devices WHERE vendor != 'N/A - Random Address' OR NAME != ''"
         cursor.execute(allDevicesSQL)
         db_devices = cursor.fetchall()
         
@@ -212,15 +212,16 @@ def fetchAllDevices():
 
             #Figure out the manuf
             manuf = "unknown"
-            if(device_mode == "classic" or address_type == "public"):
+            if(manufacturer is not None and not manufacturer.lower().startswith("65535")):
+                    manuf = manufacturer
+            elif(device_mode == "classic" or address_type == "public"):
                 manuf = vendor
             else:
                 if(comp is not None and not comp.lower().startswith("unknown")):
                     manuf = comp
                 elif(comp_type is not None and not comp_type.lower().startswith("not assigned")):
                     manuf = comp_type
-                elif(manufacturer is not None and not manufacturer.lower().startswith("65535")):
-                    manuf = manufacturer
+                
             
             thisDevice["manuf"] = manuf
             thisDevice["uuid"] = uuid
