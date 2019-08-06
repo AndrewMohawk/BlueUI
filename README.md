@@ -44,12 +44,22 @@ Description=blue_hydra with systemd, respawn, after bluetooth
 After=bluetooth.target
 
 [Service]
-ExecStart=./home/pi/blue_hydra/bin/blue_hydra -d --mohawk-api
+WorkingDirectory=/home/pi/blue_hydra
+ExecStart=/home/pi/blue_hydra/bin/blue_hydra --daemon --mohawk-api
+#StandardOutput=syslog
+#StandardError=syslog
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
 ```
+
+Then you need to create /etc/blue_hydra:
+```mkdir /etc/blue_hydra```
+
+And add a crontab to update the database every minute:
+```sudo crontab -e```
+```* * * * * cp /etc/blue_hydra/blue_hydra.db /etc/blue_hydra/blue_ui.db```
 
 Next you can enable each service and then install them to run:
 - sudo service blue_hydra enable
